@@ -160,10 +160,10 @@ const ProductCard = ({ product }) => {
 							mr={3}
 							onClick={() => handleUpdateProduct(product._id, updatedProduct)}
 						>
-							Update
+							Atualizar
 						</Button>
 						<Button variant="ghost" onClick={onClose}>
-							Cancel
+							Cancelar
 						</Button>
 					</ModalFooter>
 				</ModalContent>
