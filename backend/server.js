@@ -16,8 +16,13 @@ app.use(express.json()); // allows us to accept JSON data in the req.body
 app.use('/api/products', productRoutes);
 
 if (process.env.NODE_ENV === 'production') {
-	const rootPath = process.cwd();
+	// Use absolute path resolution
+	const rootPath = path.resolve();
+
+	// Serve static files from frontend/dist
 	app.use(express.static(path.join(rootPath, 'frontend/dist')));
+
+	// Handle SPA routing
 	app.get('*', (req, res) => {
 		res.sendFile(path.join(rootPath, 'frontend/dist/index.html'));
 	});

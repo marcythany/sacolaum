@@ -6,7 +6,7 @@ services:
     startCommand: npm start
     envVars:
       - key: MONGO_URI
-        value: mongodb+srv://marcythany:rRUPTTJROLdkqrxp@colmeia.8nmy4.mongodb.net/sacolaum?retryWrites=true&w=majority
+        value: mongodb+srv://marcythany:TQVGqnRI3v1948NQ@colmeia.8nmy4.mongodb.net/sacolaum?retryWrites=true&w=majority
       - key: NODE_ENV
         value: production
     branch: main
