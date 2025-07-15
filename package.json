@@ -8,7 +8,7 @@
 		"install-frontend": "cd frontend && npm install --production=false",
 		"build-frontend": "cd frontend && npm run build",
 		"start": "NODE_ENV=production node backend/server.js",
-		"render-build": "npm run install-backend && npm run install-frontend && npm run build-frontend"
+		"build": "npm run install-backend && npm run install-frontend && npm run build-frontend"
 	},
 	"type": "module",
 	"keywords": [],

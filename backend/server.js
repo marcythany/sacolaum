@@ -11,17 +11,15 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const __dirname = path.resolve();
-
 app.use(express.json()); // allows us to accept JSON data in the req.body
 
 app.use('/api/products', productRoutes);
 
 if (process.env.NODE_ENV === 'production') {
-	const frontendPath = path.join(__dirname, '../frontend/dist');
-	app.use(express.static(frontendPath));
+	const rootPath = process.cwd();
+	app.use(express.static(path.join(rootPath, 'frontend/dist')));
 	app.get('*', (req, res) => {
-		res.sendFile(path.join(frontendPath, 'index.html'));
+		res.sendFile(path.join(rootPath, 'frontend/dist/index.html'));
 	});
 }
 
