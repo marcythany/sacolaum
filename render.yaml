@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: sacolaum-prod
+    env: node
+    buildCommand: npm run render-build
+    startCommand: npm start
+    envVars:
+      - key: MONGO_URI
+        value: mongodb+srv://marcythany:rRUPTTJROLdkqrxp@colmeia.8nmy4.mongodb.net/sacolaum?retryWrites=true&w=majority
+      - key: NODE_ENV
+        value: production
+    branch: main
