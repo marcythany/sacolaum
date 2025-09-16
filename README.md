@@ -11,6 +11,7 @@ Uma aplicação full-stack para gerenciamento de produtos, construída com React
 - ✅ Interface responsiva com Chakra UI
 - ✅ Animações suaves com Framer Motion
 - ✅ Gerenciamento de estado com Zustand
+- ✅ Integração com dados mock (Platzi Fake API)
 
 ## Tecnologias Utilizadas
 
@@ -89,6 +90,33 @@ Uma aplicação full-stack para gerenciamento de produtos, construída com React
 | PUT    | `/api/products/:id` | Atualizar produto       |
 | DELETE | `/api/products/:id` | Deletar produto         |
 
+## Integração com Dados Mock
+
+O projeto inclui integração com a [Platzi Fake API](https://fakeapi.platzi.com/en/about/introduction/) para demonstração com dados mock:
+
+### Funcionalidades Mock
+
+- ✅ Busca automática de produtos da API externa
+- ✅ Mapeamento de dados para formato local
+- ✅ Operações CRUD desabilitadas (somente leitura)
+- ✅ Mensagens informativas sobre limitações
+
+### Como Usar Dados Mock
+
+1. Certifique-se de que o servidor de desenvolvimento está rodando
+2. A aplicação buscará automaticamente produtos da Platzi Fake API
+3. Os produtos serão exibidos na interface principal
+4. Operações de criação, edição e exclusão mostrarão mensagens informativas
+
+### API Mock Utilizada
+
+- **Produtos**: `https://api.escuelajs.co/api/v1/products`
+- **Estrutura de dados mapeada**:
+  - `title` → `name`
+  - `price` → `price`
+  - `images[0]` → `image`
+  - `id` → `_id`
+
 ## Estrutura do Projeto
 
 ```
@@ -112,7 +140,13 @@ sacolaum/
 
 ## Captura de Tela
 
+### Aplicação com Dados Locais
+
 ![Screenshot da Aplicação](./frontend/public/sacolaum-screenshot.png)
+
+### Aplicação com Dados Mock (Platzi Fake API)
+
+![Screenshot com Dados Mock](./frontend/public/sacolaum-mock-data-screenshot.png)
 
 ## Scripts Disponíveis
 
@@ -142,7 +176,6 @@ sacolaum/
 2. Crie uma branch para sua feature (`git checkout -b feature/nova-feature`)
 3. Commit suas mudanças (`git commit -m 'feat: adiciona nova feature'`)
 4. Push para a branch (`git push origin feature/nova-feature`)
-5. Abra um Pull Request
 
 ## Licença
 

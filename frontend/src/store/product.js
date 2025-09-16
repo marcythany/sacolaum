@@ -1,59 +1,45 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 
 export const useProductStore = create((set) => ({
 	products: [],
 	setProducts: (products) => set({ products }),
 	createProduct: async (newProduct) => {
 		if (!newProduct.name || !newProduct.image || !newProduct.price) {
-			return { success: false, message: "Por favor, preencha todos os campos" };
+			return { success: false, message: 'Por favor, preencha todos os campos' };
 		}
-		const res = await fetch("/api/products", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(newProduct),
-		});
-		const data = await res.json();
-		set((state) => ({ products: [...state.products, data.data] }));
-		return { success: true, message: "Produto criado com sucesso" };
+		// Mock data - simulate success without actual API call
+		return {
+			success: false,
+			message:
+				'Criação de produtos não suportada com dados mock. Use a API local para operações completas.',
+		};
 	},
 	fetchProducts: async () => {
-		const res = await fetch("/api/products");
+		const res = await fetch('https://api.escuelajs.co/api/v1/products');
 		const data = await res.json();
-		set({ products: data.data });
-	},
-	deleteProduct: async (pid) => {
-		const res = await fetch(`/api/products/${pid}`, {
-			method: "DELETE",
-		});
-		const data = await res.json();
-		if (!data.success) return { success: false, message: data.message };
-
-		// update the ui immediately, without needing a refresh
-		set((state) => ({
-			products: state.products.filter((product) => product._id !== pid),
+		// Map Platzi API data to local format
+		const mappedProducts = data.map((product) => ({
+			_id: product.id,
+			name: product.title,
+			price: product.price,
+			image: product.images[0] || product.images,
 		}));
-		return { success: true, message: data.message };
+		set({ products: mappedProducts });
 	},
-	updateProduct: async (pid, updatedProduct) => {
-		const res = await fetch(`/api/products/${pid}`, {
-			method: "PUT",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(updatedProduct),
-		});
-		const data = await res.json();
-		if (!data.success) return { success: false, message: data.message };
-
-		// update the ui immediately, without needing a refresh
-		set((state) => ({
-			products: state.products.map((product) =>
-				product._id === pid ? data.data : product
-			),
-		}));
-
-		return { success: true, message: data.message };
+	deleteProduct: async () => {
+		// Mock data - simulate success without actual API call
+		return {
+			success: false,
+			message:
+				'Exclusão de produtos não suportada com dados mock. Use a API local para operações completas.',
+		};
+	},
+	updateProduct: async () => {
+		// Mock data - simulate success without actual API call
+		return {
+			success: false,
+			message:
+				'Atualização de produtos não suportada com dados mock. Use a API local para operações completas.',
+		};
 	},
 }));
