@@ -137,20 +137,20 @@ npm run build
 
 ## 🔌 API Endpoints
 
-| Método | Endpoint              | Descrição                    | Exemplo |
-|--------|----------------------|-----------------------------|---------|
-| GET    | `/api/products`      | Obter todos os produtos    | `fetch('/api/products')` |
-| POST   | `/api/products`      | Criar novo produto         | `fetch('/api/products', { method: 'POST', body: JSON })` |
-| PUT    | `/api/products?id=1` | Atualizar produto          | `fetch('/api/products?id=1', { method: 'PUT', body: JSON })` |
-| DELETE | `/api/products?id=1` | Deletar produto            | `fetch('/api/products?id=1', { method: 'DELETE' })` |
+| Método | Endpoint             | Descrição               | Exemplo                                                      |
+| ------ | -------------------- | ----------------------- | ------------------------------------------------------------ |
+| GET    | `/api/products`      | Obter todos os produtos | `fetch('/api/products')`                                     |
+| POST   | `/api/products`      | Criar novo produto      | `fetch('/api/products', { method: 'POST', body: JSON })`     |
+| PUT    | `/api/products?id=1` | Atualizar produto       | `fetch('/api/products?id=1', { method: 'PUT', body: JSON })` |
+| DELETE | `/api/products?id=1` | Deletar produto         | `fetch('/api/products?id=1', { method: 'DELETE' })`          |
 
 ### Exemplo de Payload
 
 ```json
 {
-  "name": "Produto Exemplo",
-  "price": 29.99,
-  "image": "https://example.com/image.jpg"
+	"name": "Produto Exemplo",
+	"price": 29.99,
+	"image": "https://example.com/image.jpg"
 }
 ```
 
@@ -199,16 +199,16 @@ sacolaum/
 ### Aplicação Implantada no Vercel
 
 ![Página Inicial - Lista de Produtos](./screenshots/vercel-homepage.png)
-*Página inicial mostrando lista de produtos carregados do banco de dados PostgreSQL*
+_Página inicial mostrando lista de produtos carregados do banco de dados PostgreSQL_
 
 ![Criação de Produto](./screenshots/vercel-create-product.png)
-*Formulário para criação de novos produtos com validação*
+_Formulário para criação de novos produtos com validação_
 
 ![API Funcionando](./screenshots/vercel-api-response.png)
-*Resposta da API RESTful mostrando produtos em formato JSON*
+_Resposta da API RESTful mostrando produtos em formato JSON_
 
 ![Interface Responsiva](./screenshots/vercel-responsive.png)
-*Interface adaptável para dispositivos móveis e desktop*
+_Interface adaptável para dispositivos móveis e desktop_
 
 ### Como Capturar Novas Screenshots
 
@@ -257,6 +257,7 @@ npm run build                    # Build completo
 
 **Sintomas**: Frontend não consegue conectar com a API
 **Solução**:
+
 1. Verifique se o backend está rodando: `node backend/server.js`
 2. Confirme `VITE_API_BASE_URL` no `.env`
 3. Para Vercel, certifique-se que `VITE_API_BASE_URL` está vazio
@@ -265,6 +266,7 @@ npm run build                    # Build completo
 
 **Sintomas**: API retorna erro de conexão com banco
 **Solução**:
+
 1. Verifique `DATABASE_URL` no `.env` (local) ou Vercel env vars
 2. Execute `npm run prisma:push` para aplicar schema
 3. Teste conexão: `npm run prisma:studio`
@@ -273,9 +275,21 @@ npm run build                    # Build completo
 
 **Sintomas**: Interface mostra "Nenhum produto encontrado"
 **Solução**:
+
 1. Execute `npm run prisma:seed` para popular banco
 2. Verifique se API está respondendo: `curl http://localhost:8080/api/products`
 3. Confirme variáveis de ambiente
+
+### Erro: "react-refresh/only-export-components" (ESLint)
+
+**Sintomas**: ESLint mostra erro sobre fast refresh em `LanguageContext.jsx`
+**Solução**:
+
+1. O erro ocorre quando um arquivo exporta tanto componentes quanto funções/hook
+2. **Solução aplicada**: Hook `useLanguage` movido para `frontend/src/hooks/useLanguage.js`
+3. Arquivo `LanguageContext.jsx` agora exporta apenas o componente `LanguageProvider`
+4. Todas as importações do hook foram atualizadas para o novo caminho
+5. Isso garante compatibilidade com React Fast Refresh durante desenvolvimento
 
 ## 🤝 Contribuição
 
