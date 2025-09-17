@@ -19,8 +19,8 @@ RUN npx prisma generate
 # Copy source code
 COPY . .
 
-# Build the frontend
-RUN npm run build-frontend
+# Copy pre-built frontend (built before Docker build)
+COPY frontend/dist ./frontend/dist
 
 # Expose port
 EXPOSE 8080

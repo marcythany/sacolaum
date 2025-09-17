@@ -34,3 +34,5 @@ coverage
 .drone.json.sig
 .drone.yaml.sig
 render.yaml
+# Keep frontend/dist for Docker build
+!frontend/dist
