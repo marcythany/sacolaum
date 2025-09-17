@@ -7,39 +7,39 @@ export const useProductStore = create((set) => ({
 		if (!newProduct.name || !newProduct.image || !newProduct.price) {
 			return { success: false, message: 'Por favor, preencha todos os campos' };
 		}
-		// Mock data - simulate success without actual API call
-		return {
-			success: false,
-			message:
-				'Criação de produtos não suportada com dados mock. Use a API local para operações completas.',
-		};
+		const res = await fetch('/api/products', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(newProduct),
+		});
+		const data = await res.json();
+		return data;
 	},
 	fetchProducts: async () => {
-		const res = await fetch('https://api.escuelajs.co/api/v1/products');
+		const res = await fetch('/api/products');
 		const data = await res.json();
-		// Map Platzi API data to local format
-		const mappedProducts = data.map((product) => ({
-			_id: product.id,
-			name: product.title,
-			price: product.price,
-			image: product.images[0] || product.images,
-		}));
-		set({ products: mappedProducts });
+		if (data.success) {
+			set({ products: data.data });
+		}
 	},
-	deleteProduct: async () => {
-		// Mock data - simulate success without actual API call
-		return {
-			success: false,
-			message:
-				'Exclusão de produtos não suportada com dados mock. Use a API local para operações completas.',
-		};
+	deleteProduct: async (pid) => {
+		const res = await fetch(`/api/products?id=${pid}`, {
+			method: 'DELETE',
+		});
+		const data = await res.json();
+		return data;
 	},
-	updateProduct: async () => {
-		// Mock data - simulate success without actual API call
-		return {
-			success: false,
-			message:
-				'Atualização de produtos não suportada com dados mock. Use a API local para operações completas.',
-		};
+	updateProduct: async (pid, updatedProduct) => {
+		const res = await fetch(`/api/products?id=${pid}`, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(updatedProduct),
+		});
+		const data = await res.json();
+		return data;
 	},
 }));
