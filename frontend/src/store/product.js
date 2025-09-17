@@ -1,6 +1,8 @@
 import { create } from 'zustand';
 
-const API_BASE = import.meta.env.DEV ? 'http://localhost:8080' : '';
+const API_BASE = import.meta.env.DEV
+	? 'http://localhost:8080'
+	: 'https://sacolaum.vercel.app';
 
 export const useProductStore = create((set) => ({
 	products: [],
