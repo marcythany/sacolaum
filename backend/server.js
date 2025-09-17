@@ -1,3 +1,4 @@
+import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
 import path from 'path';
@@ -11,6 +12,7 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8080;
 
+app.use(cors()); // Enable CORS for all routes
 app.use(express.json()); // allows us to accept JSON data in the req.body
 
 app.use('/api/products', productRoutes);

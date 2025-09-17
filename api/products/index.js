@@ -1,4 +1,6 @@
-import prisma from '../../backend/config/db.js';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 export default async function handler(req, res) {
 	const { method } = req;
@@ -19,12 +21,10 @@ export default async function handler(req, res) {
 		case 'POST':
 			const product = req.body;
 			if (!product.name || !product.price || !product.image) {
-				return res
-					.status(400)
-					.json({
-						success: false,
-						message: 'Por favor, preencha todos os campos',
-					});
+				return res.status(400).json({
+					success: false,
+					message: 'Por favor, preencha todos os campos',
+				});
 			}
 			try {
 				const newProduct = await prisma.product.create({ data: product });
