@@ -9,7 +9,7 @@
 		"build-frontend": "cd frontend && npm run build",
 		"start": "node backend/server.js",
 		"dev": "NODE_ENV=development node backend/server.js",
-		"build": "npm run install-backend && npm run install-frontend && npm run build-frontend && npm run docker:build",
+		"build": "npm run install-backend && npm run install-frontend && npm run build-frontend",
 		"docker:build": "docker build -t sacolaum .",
 		"prisma:generate": "prisma generate",
 		"prisma:push": "prisma db push",
