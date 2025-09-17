@@ -7,8 +7,12 @@
 		"install-backend": "cd backend && npm install",
 		"install-frontend": "cd frontend && npm install --production=false",
 		"build-frontend": "cd frontend && npm run build",
-		"start": "NODE_ENV=production node backend/server.js",
-		"build": "npm run install-backend && npm run install-frontend && npm run build-frontend"
+		"start": "node backend/server.js",
+		"dev": "NODE_ENV=development node backend/server.js",
+		"build": "npm run install-backend && npm run install-frontend && npm run build-frontend",
+		"prisma:generate": "prisma generate",
+		"prisma:push": "prisma db push",
+		"prisma:migrate": "prisma migrate deploy"
 	},
 	"type": "module",
 	"keywords": [],
@@ -17,9 +21,11 @@
 	"dependencies": {
 		"dotenv": "^16.4.5",
 		"express": "^4.19.2",
-		"mongoose": "^8.5.1"
+		"@prisma/client": "^5.15.0",
+		"pg": "^8.12.0"
 	},
 	"devDependencies": {
-		"nodemon": "^3.1.4"
+		"nodemon": "^3.1.4",
+		"prisma": "^5.15.0"
 	}
 }
