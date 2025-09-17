@@ -15,11 +15,13 @@ import { motion } from 'framer-motion';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
+import { useLanguage } from '../hooks/useLanguage';
 import { useProductStore } from '../store/product';
 
 const MotionBox = motion(Box);
 
 const HomePage = () => {
+	const { t } = useLanguage();
 	const {
 		fetchProducts,
 		products,
@@ -112,7 +114,7 @@ const HomePage = () => {
 							bgClip='text'
 							mb={2}
 						>
-							Product Catalog
+							{t('home.title')}
 						</Text>
 						<Text
 							fontSize={{ base: 'md', md: 'lg' }}
@@ -120,7 +122,7 @@ const HomePage = () => {
 							maxW='600px'
 							mx='auto'
 						>
-							Discover amazing products from our curated collection
+							{t('home.subtitle')}
 						</Text>
 					</MotionBox>
 
@@ -146,7 +148,7 @@ const HomePage = () => {
 									{products.length}
 								</Text>
 								<Text fontSize='sm' color='gray.500'>
-									Total Products
+									{t('home.stats.totalProducts')}
 								</Text>
 							</VStack>
 							<VStack spacing={0}>
@@ -154,7 +156,7 @@ const HomePage = () => {
 									{currentPage}
 								</Text>
 								<Text fontSize='sm' color='gray.500'>
-									Current Page
+									{t('home.stats.currentPage')}
 								</Text>
 							</VStack>
 							<VStack spacing={0}>
@@ -162,7 +164,7 @@ const HomePage = () => {
 									{paginatedProducts.length}
 								</Text>
 								<Text fontSize='sm' color='gray.500'>
-									On This Page
+									{t('home.stats.onThisPage')}
 								</Text>
 							</VStack>
 						</HStack>
@@ -237,10 +239,10 @@ const HomePage = () => {
 								📦
 							</Text>
 							<Text fontSize='2xl' fontWeight='bold' mb={4}>
-								No products found
+								{t('home.empty.title')}
 							</Text>
 							<Text fontSize='lg' color='gray.500' mb={6}>
-								Start building your product catalog by creating your first item
+								{t('home.empty.description')}
 							</Text>
 							<Button
 								as={Link}
@@ -251,7 +253,7 @@ const HomePage = () => {
 								_hover={{ transform: 'scale(1.05)' }}
 								transition='all 0.2s'
 							>
-								Create First Product
+								{t('home.empty.createButton')}
 							</Button>
 						</MotionBox>
 					)}
@@ -276,7 +278,7 @@ const HomePage = () => {
 								}}
 								transition='all 0.2s'
 							>
-								Add New Product
+								{t('home.createButton')}
 							</Button>
 						</MotionBox>
 					)}

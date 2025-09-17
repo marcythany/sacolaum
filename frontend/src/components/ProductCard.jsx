@@ -25,12 +25,14 @@ import {
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { useLanguage } from '../hooks/useLanguage';
 import { useProductStore } from '../store/product';
 
 const MotionBox = motion(Box);
 
 const ProductCard = ({ product }) => {
 	const [updatedProduct, setUpdatedProduct] = useState(product);
+	const { t } = useLanguage();
 
 	const bg = useColorModeValue('white', 'gray.800');
 
@@ -181,7 +183,7 @@ const ProductCard = ({ product }) => {
 							fontSize='xs'
 							fontWeight='semibold'
 						>
-							NEW
+							{t('product.new')}
 						</Badge>
 					</HStack>
 
@@ -195,7 +197,7 @@ const ProductCard = ({ product }) => {
 							onClick={onOpen}
 							_hover={{ bg: 'cyan.50', borderColor: 'cyan.300' }}
 						>
-							Edit
+							{t('product.edit')}
 						</Button>
 						<Button
 							size='sm'
@@ -205,7 +207,7 @@ const ProductCard = ({ product }) => {
 							onClick={() => handleDeleteProduct(product._id)}
 							_hover={{ bg: 'red.50', borderColor: 'red.300' }}
 						>
-							Delete
+							{t('product.delete')}
 						</Button>
 					</HStack>
 				</VStack>

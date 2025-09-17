@@ -9,6 +9,7 @@ import {
 	VStack,
 } from '@chakra-ui/react';
 import { useState } from 'react';
+import { useLanguage } from '../hooks/useLanguage';
 import { useProductStore } from '../store/product';
 
 const CreatePage = () => {
@@ -17,6 +18,7 @@ const CreatePage = () => {
 		price: '',
 		image: '',
 	});
+	const { t } = useLanguage();
 	const toast = useToast();
 
 	const { createProduct } = useProductStore();
@@ -45,7 +47,7 @@ const CreatePage = () => {
 		<Container maxW={'container.sm'}>
 			<VStack spacing={8}>
 				<Heading as={'h1'} size={'2xl'} textAlign={'center'} mb={8}>
-					Criar novo Produto.
+					{t('create.title')}
 				</Heading>
 
 				<Box
@@ -57,7 +59,7 @@ const CreatePage = () => {
 				>
 					<VStack spacing={4}>
 						<Input
-							placeholder='Nome do Produto'
+							placeholder={t('create.placeholders.name')}
 							name='name'
 							value={newProduct.name}
 							onChange={(e) =>
@@ -65,7 +67,7 @@ const CreatePage = () => {
 							}
 						/>
 						<Input
-							placeholder='Preço'
+							placeholder={t('create.placeholders.price')}
 							name='price'
 							type='number'
 							value={newProduct.price}
@@ -74,7 +76,7 @@ const CreatePage = () => {
 							}
 						/>
 						<Input
-							placeholder='Imagem URL'
+							placeholder={t('create.placeholders.image')}
 							name='image'
 							value={newProduct.image}
 							onChange={(e) =>
@@ -83,7 +85,7 @@ const CreatePage = () => {
 						/>
 
 						<Button colorScheme='cyan' onClick={handleAddProduct} w='full'>
-							Adic Produto
+							{t('create.button')}
 						</Button>
 					</VStack>
 				</Box>

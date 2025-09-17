@@ -5,46 +5,48 @@ import {
 	HStack,
 	Text,
 	useColorMode,
-} from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+} from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 
-import { PlusSquareIcon } from "@chakra-ui/icons";
-import { IoMoon } from "react-icons/io5";
-import { LuSun } from "react-icons/lu";
+import { PlusSquareIcon } from '@chakra-ui/icons';
+import { IoMoon } from 'react-icons/io5';
+import { LuSun } from 'react-icons/lu';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const Navbar = () => {
 	const { colorMode, toggleColorMode } = useColorMode();
 
 	return (
-		<Container maxW={"1140px"} px={4}>
+		<Container maxW={'1140px'} px={4}>
 			<Flex
 				h={16}
-				alignItems={"center"}
-				justifyContent={"space-between"}
+				alignItems={'center'}
+				justifyContent={'space-between'}
 				flexDir={{
-					base: "column",
-					sm: "row",
+					base: 'column',
+					sm: 'row',
 				}}
 			>
 				<Text
-					fontSize={{ base: "22", sm: "28" }}
-					fontWeight={"bold"}
-					textTransform={"uppercase"}
-					textAlign={"center"}
-					bgGradient={"linear(to-r, cyan.400, purple.600)"}
-					bgClip={"text"}
+					fontSize={{ base: '22', sm: '28' }}
+					fontWeight={'bold'}
+					textTransform={'uppercase'}
+					textAlign={'center'}
+					bgGradient={'linear(to-r, cyan.400, purple.600)'}
+					bgClip={'text'}
 				>
-					<Link to={"/"}>Sacolaum 🛍️</Link>
+					<Link to={'/'}>Sacolaum 🛍️</Link>
 				</Text>
 
-				<HStack spacing={2} alignItems={"center"}>
-					<Link to={"/create"}>
+				<HStack spacing={2} alignItems={'center'}>
+					<Link to={'/create'}>
 						<Button>
 							<PlusSquareIcon fontSize={20} />
 						</Button>
 					</Link>
+					<LanguageSwitcher />
 					<Button onClick={toggleColorMode}>
-						{colorMode === "light" ? <IoMoon /> : <LuSun size="20" />}
+						{colorMode === 'light' ? <IoMoon /> : <LuSun size='20' />}
 					</Button>
 				</HStack>
 			</Flex>
