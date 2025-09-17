@@ -1,5 +1,7 @@
 import { create } from 'zustand';
 
+const API_BASE = import.meta.env.DEV ? 'http://localhost:8080' : '';
+
 export const useProductStore = create((set) => ({
 	products: [],
 	setProducts: (products) => set({ products }),
@@ -7,7 +9,7 @@ export const useProductStore = create((set) => ({
 		if (!newProduct.name || !newProduct.image || !newProduct.price) {
 			return { success: false, message: 'Por favor, preencha todos os campos' };
 		}
-		const res = await fetch('/api/products', {
+		const res = await fetch(`${API_BASE}/api/products`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -18,21 +20,21 @@ export const useProductStore = create((set) => ({
 		return data;
 	},
 	fetchProducts: async () => {
-		const res = await fetch('/api/products');
+		const res = await fetch(`${API_BASE}/api/products`);
 		const data = await res.json();
 		if (data.success) {
 			set({ products: data.data });
 		}
 	},
 	deleteProduct: async (pid) => {
-		const res = await fetch(`/api/products?id=${pid}`, {
+		const res = await fetch(`${API_BASE}/api/products?id=${pid}`, {
 			method: 'DELETE',
 		});
 		const data = await res.json();
 		return data;
 	},
 	updateProduct: async (pid, updatedProduct) => {
-		const res = await fetch(`/api/products?id=${pid}`, {
+		const res = await fetch(`${API_BASE}/api/products?id=${pid}`, {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json',

@@ -5,9 +5,10 @@ const prisma = new PrismaClient({
 		db: {
 			url: process.env.DATABASE_URL,
 		},
-export default prisma;
 	},
 });
+
+export default prisma;
 
 export const connectDB = async () => {
 	try {
