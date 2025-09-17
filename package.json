@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"install-backend": "cd backend && npm install",
-		"install-frontend": "cd frontend && npm install --production=false",
+		"install-frontend": "cd frontend && npm install",
 		"build-frontend": "cd frontend && npm run build",
 		"start": "node backend/server.js",
 		"dev": "NODE_ENV=development node backend/server.js",
