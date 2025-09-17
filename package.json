@@ -13,7 +13,8 @@
 		"docker:build": "docker build -t sacolaum .",
 		"prisma:generate": "prisma generate",
 		"prisma:push": "prisma db push",
-		"prisma:migrate": "prisma migrate deploy"
+		"prisma:migrate": "prisma migrate deploy",
+		"prisma:seed": "node prisma/seed.js"
 	},
 	"type": "module",
 	"keywords": [],
