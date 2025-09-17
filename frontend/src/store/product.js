@@ -7,9 +7,21 @@ const API_BASE =
 		? 'http://localhost:8080'
 		: '';
 
-export const useProductStore = create((set) => ({
+export const useProductStore = create((set, get) => ({
 	products: [],
+	currentPage: 1,
+	totalPages: 1,
+	isLoading: false,
 	setProducts: (products) => set({ products }),
+	setCurrentPage: (page) => set({ currentPage: page }),
+	setTotalPages: (total) => set({ totalPages: total }),
+	setLoading: (loading) => set({ isLoading: loading }),
+	getPaginatedProducts: () => {
+		const state = get();
+		const startIndex = (state.currentPage - 1) * 10;
+		const endIndex = startIndex + 10;
+		return state.products.slice(startIndex, endIndex);
+	},
 	createProduct: async (newProduct) => {
 		if (!newProduct.name || !newProduct.image || !newProduct.price) {
 			return { success: false, message: 'Por favor, preencha todos os campos' };
@@ -25,10 +37,23 @@ export const useProductStore = create((set) => ({
 		return data;
 	},
 	fetchProducts: async () => {
-		const res = await fetch(`${API_BASE}/api/products`);
-		const data = await res.json();
-		if (data.success) {
-			set({ products: data.data });
+		set({ isLoading: true });
+		try {
+			const res = await fetch(`${API_BASE}/api/products`);
+			const data = await res.json();
+			if (data.success) {
+				const allProducts = data.data;
+				const totalPages = Math.ceil(allProducts.length / 10);
+				set({
+					products: allProducts,
+					totalPages,
+					currentPage: 1,
+					isLoading: false,
+				});
+			}
+		} catch (error) {
+			console.error('Error fetching products:', error);
+			set({ isLoading: false });
 		}
 	},
 	deleteProduct: async (pid) => {
